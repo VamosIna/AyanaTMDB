@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Flutter: Run main.dart",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "args": [
+        "--dart-define=TMDB_API_KEY=ff951af73ca3d4b152d92dcc97117f8f",
+        "--dart-define=TMDB_BEARER=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZjk1MWFmNzNjYTNkNGIxNTJkOTJkY2M5NzExN2Y4ZiIsIm5iZiI6MTY0MDk3OTgzMS43NTQsInN1YiI6IjYxY2Y1ZDc3N2I3YjRkMDA5NGY3YTYxYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Nw8gBb3P8oEE-FsHKdv0yXm4OSbG7_PTFlQIbWjL5Yg"
+      ]
+    }
+  ]
+}

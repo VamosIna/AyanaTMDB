@@ -57,6 +57,9 @@ dependencies:
   # Routing
   go_router: ^14.2.7
 
+  # Service locator
+  get_it: ^7.6.7
+
   # i18n
   flutter_localizations:
     sdk: flutter

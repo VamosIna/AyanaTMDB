@@ -6,11 +6,11 @@
 > Deadline: **2 hari**
 
 ## 0. Persiapan Proyek
-- [ ] Aktifkan null-safety & lints ketat (flutter_lints / very_good_analysis)
-- [ ] Siapkan Git repo + initial commit (https://github.com/VamosIna/AyanaTMDB.git)
-- [ ] Buat branch `feat/bootstrap`
+- [x] Aktifkan null-safety & lints ketat (flutter_lints / very_good_analysis)
+- [x] Siapkan Git repo + initial commit (https://github.com/VamosIna/AyanaTMDB.git)
+- [x] Buat branch `feat/bootstrap`
 ## 1. Dependencies
-- [ ] Tambah dependencies:
+- [x] Tambah dependencies:
   - State: `flutter_bloc`, `equatable`, `stream_transform`, `bloc_concurrency`
   - HTTP: `dio`, `retrofit`, `json_annotation`, `pretty_dio_logger`
   - Codegen: `build_runner`, `json_serializable`, `retrofit_generator`, `freezed`, `freezed_annotation`
@@ -19,7 +19,7 @@
   - Routing: `go_router`
   - i18n: `flutter_localizations`, `intl`
   - Testing: `bloc_test`, `mocktail`
-- [ ] `flutter pub get`
+- [x] `flutter pub get`
 
 ## 2. Struktur Folder (Clean Architecture)
 .
@@ -133,22 +133,22 @@
                └─ rating_badge.dart
 
 ## 3. Konfigurasi Platform
-- [ ] Android: `android/app/build.gradle` → `minSdkVersion 29`
-- [ ] iOS: `ios/Podfile` → `platform :ios, '12.0'`
+- [x] Android: `android/app/build.gradle` → `minSdkVersion 29`
+- [x] iOS: `ios/Podfile` → `platform :ios, '12.0'`
 - [ ] Web: `index.html` meta theme-color, responsive viewport
 
 ## 4. Konfigurasi API & Environment
-- [ ] Tambah `TMDB_API_KEY` via `--dart-define`
-- [ ] `core/constants/api_constants.dart` (baseUrl, imageBaseUrl)
-- [ ] `auth_interceptor.dart` menambahkan query `api_key` ke setiap request
+- [x] Tambah `TMDB_API_KEY` via `--dart-define`
+- [x] `core/constants/api_constants.dart` (baseUrl, imageBaseUrl)
+- [x] `auth_interceptor.dart` menambahkan query `api_key` ke setiap request
 
 ## 5. Bootstrap Aplikasi
-- [ ] `dio_client.dart` + interceptors (auth + logger)
-- [ ] Setup `Hive` dan registrasi adapter (kalau pakai model/adapter spesifik)
-- [ ] Service locator sederhana (get_it) di `core/di/injector.dart`
-- [ ] `go_router` routes: `/`, `/search`, `/movie/:id`, `/favorites`
-- [ ] `app/theme.dart` + light/dark theme
-- [ ] Integrasi `MaterialApp` + `FlutterLocalizations`
+- [x] `dio_client.dart` + interceptors (auth + logger)
+- [x] Setup `Hive` dan registrasi adapter (kalau pakai model/adapter spesifik)
+- [x] Service locator sederhana (get_it) di `core/di/injector.dart`
+- [x] `go_router` routes: `/`, `/search`, `/movie/:id`, `/favorites`
+- [x] `app/theme.dart` + light/dark theme
+- [x] Integrasi `MaterialApp` + `FlutterLocalizations`
 
 ## 6. Layer Data
 - [ ] Retrofit interface untuk TMDB:
