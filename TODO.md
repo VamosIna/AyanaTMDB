@@ -151,23 +151,23 @@
 - [x] Integrasi `MaterialApp` + `FlutterLocalizations`
 
 ## 6. Layer Data
-- [ ] Retrofit interface untuk TMDB:
-  - [ ] `GET /movie/popular`
-  - [ ] `GET /search/movie`
-  - [ ] `GET /movie/{movie_id}`
-  - [ ] `GET /movie/{movie_id}/recommendations`
-- [ ] Local DS (Hive):
-  - [ ] Box: `popular_movies` (cache+timestamp)
-  - [ ] Box: `movie_detail_{id}` (per item cache)
-  - [ ] Box: `favorites` (set<int>)
-- [ ] Mapper: `MovieModel ↔ Movie` (entity), dst.
-- [ ] Repository impl: strategi **cache-first**:
-  - [ ] baca cache (valid TTL) → kalau tidak ada/expired, hit API lalu simpan
+- [x] Retrofit interface untuk TMDB:
+  - [x] `GET /movie/popular`
+  - [x] `GET /search/movie`
+  - [x] `GET /movie/{movie_id}`
+  - [x] `GET /movie/{movie_id}/recommendations`
+- [x] Local DS (Hive):
+  - [x] Box: `popular_movies` (cache+timestamp)
+  - [x] Box: `movie_detail_{id}` (per item cache)
+  - [x] Box: `favorites` (set<int>)
+- [x] Mapper: `MovieModel ↔ Movie` (entity), dst.
+- [x] Repository impl: strategi **cache-first**:
+  - [x] baca cache (valid TTL) → kalau tidak ada/expired, hit API lalu simpan
 
 ## 7. Layer Domain
-- [ ] Entities (immutable + equatable)
-- [ ] Repos abstract
-- [ ] Usecases (callable classes) dengan return `Either<Failure, T>`
+- [x] Entities (immutable + equatable)
+- [x] Repos abstract
+- [x] Usecases (callable classes) dengan return `Either<Failure, T>`
 
 ## 8. Layer Presentation
 - [ ] BLoC Popular (pagination, pull-to-refresh)

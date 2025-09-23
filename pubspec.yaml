@@ -60,6 +60,9 @@ dependencies:
   # Service locator
   get_it: ^7.6.7
 
+  # Functional programming (Either)
+  dartz: ^0.10.1
+
   # i18n
   flutter_localizations:
     sdk: flutter
