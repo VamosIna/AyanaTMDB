@@ -29,7 +29,7 @@ class MovieCard extends StatelessWidget {
               child:
                   movie.posterPath != null
                       ? Image.network(
-                        '${ApiConstants.posterOriginalBaseUrl}${movie.posterPath}',
+                        '${ApiConstants.imageBaseUrl}${movie.posterPath}',
                         fit: BoxFit.cover,
                         errorBuilder:
                             (context, error, stackTrace) =>

@@ -12,7 +12,7 @@ class MovieCardHorizontal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.push('/movie/${movie.id}'),
+      onTap: () => context.go('/movie/${movie.id}'),
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -22,7 +22,7 @@ class MovieCardHorizontal extends StatelessWidget {
               aspectRatio: 2 / 3,
               child: movie.posterPath != null
                   ? Image.network(
-                      '${ApiConstants.posterOriginalBaseUrl}${movie.posterPath}',
+                      '${ApiConstants.imageBaseUrl}${movie.posterPath}',
                       fit: BoxFit.cover,
                       width: 110,
                       errorBuilder: (context, error, stackTrace) => const Icon(Icons.broken_image),
