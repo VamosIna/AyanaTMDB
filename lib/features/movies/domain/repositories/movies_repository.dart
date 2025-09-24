@@ -6,6 +6,7 @@ import 'package:ayana_tmdb/core/error/failures.dart';
 
 abstract class MoviesRepository {
   Future<Either<Failure, List<Movie>>> getPopularMovies();
+  Future<Either<Failure, List<Movie>>> getNowPlayingMovies();
   Future<Either<Failure, List<Movie>>> searchMovies(String query);
   Future<Either<Failure, MovieDetail>> getMovieDetail(int id);
   Future<Either<Failure, List<Movie>>> getRecommendations(int movieId);

@@ -1,3 +1,4 @@
+import 'package:ayana_tmdb/features/movies/domain/usecases/get_now_playing_movies.dart';
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 import 'package:ayana_tmdb/core/network/dio_client.dart';
@@ -37,6 +38,7 @@ Future<void> init() async {
 
   // Usecases
   sl.registerLazySingleton(() => GetPopularMovies(sl()));
+  sl.registerLazySingleton(() => GetNowPlayingMovies(sl()));
   sl.registerLazySingleton(() => SearchMovies(sl()));
   sl.registerLazySingleton(() => GetMovieDetail(sl()));
   sl.registerLazySingleton(() => GetRecommendations(sl()));

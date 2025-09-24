@@ -4,6 +4,7 @@ import 'package:ayana_tmdb/app/router.dart';
 import 'package:ayana_tmdb/app/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ayana_tmdb/features/movies/domain/usecases/get_popular_movies.dart';
+import 'package:ayana_tmdb/features/movies/domain/usecases/get_now_playing_movies.dart';
 import 'package:ayana_tmdb/core/di/injector.dart';
 import 'package:ayana_tmdb/features/movies/domain/repositories/movies_repository.dart';
 
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
         ),
         RepositoryProvider<GetPopularMovies>(
           create: (_) => sl<GetPopularMovies>(),
+        ),
+        RepositoryProvider<GetNowPlayingMovies>(
+          create: (_) => sl<GetNowPlayingMovies>(),
         ),
       ],
       child: MaterialApp.router(
