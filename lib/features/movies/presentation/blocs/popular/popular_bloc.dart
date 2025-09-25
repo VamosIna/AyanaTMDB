@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:stream_transform/stream_transform.dart';
 
 import '../../../domain/entities/movie.dart';

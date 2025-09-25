@@ -17,7 +17,7 @@ abstract class MoviesRemoteDataSource {
   Future<MovieListResponse> getNowPlayingMovies();
 
   @GET('/search/movie')
-  Future<List<MovieModel>> searchMovies(@Query('query') String query);
+  Future<MovieListResponse> searchMovies(@Query('query') String query);
 
   @GET('/movie/{movie_id}')
   Future<MovieDetailModel> getMovieDetail(@Path('movie_id') int id);

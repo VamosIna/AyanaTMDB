@@ -1,0 +1,19 @@
+{
+  "@@locale": "id",
+  "appTitle": "Ayana TMDB",
+  "homeLabel": "Beranda",
+  "searchLabel": "Cari",
+  "favoritesLabel": "Daftar Saya",
+  "profileLabel": "Profil",
+  "offlineMessage": "Anda sedang offline",
+  "noMoviesFound": "Tidak ada film ditemukan.",
+  "emptyWatchlist": "Daftar tontonan Anda kosong.",
+  "noTrendingFound": "Tidak ada film trending.",
+  "popularOnNetflix": "Populer di Ayana TMDB",
+  "play": "Putar",
+  "myList": "Daftar Saya",
+  "share": "Bagikan",
+  "popularSection": "Populer di Ayana TMDB",
+  "watchlistSection": "Daftar Tontonan Anda",
+  "trendingSection": "Sedang Tren"
+}

@@ -9,7 +9,7 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
   DetailBloc({required this.getMovieDetail}) : super(DetailInitial()) {
     on<FetchMovieDetail>((event, emit) async {
       emit(DetailLoading());
-      final result = await getMovieDetail(event.movieId);
+      final result = await getMovieDetail.call(event.movieId);
       result.fold(
         (failure) => emit(DetailError(failure.toString())),
         (movie) => emit(DetailLoaded(movie)),

@@ -13,6 +13,8 @@ import 'package:ayana_tmdb/features/movies/domain/usecases/get_movie_detail.dart
 import 'package:ayana_tmdb/features/movies/domain/usecases/get_recommendations.dart';
 import 'package:ayana_tmdb/features/movies/domain/usecases/toggle_favorite.dart';
 import 'package:ayana_tmdb/features/movies/domain/usecases/get_favorites.dart';
+import 'package:ayana_tmdb/features/movies/presentation/blocs/favorite/favorite_bloc.dart';
+import 'package:ayana_tmdb/features/movies/presentation/blocs/search/search_bloc.dart' show SearchMoviesBloc;
 
 final sl = GetIt.instance;
 
@@ -44,4 +46,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetRecommendations(sl()));
   sl.registerLazySingleton(() => ToggleFavorite(sl()));
   sl.registerLazySingleton(() => GetFavorites(sl()));
+
+  // Blocs
+  sl.registerFactory(() => FavoriteBloc(getFavorites: sl(), toggleFavorite: sl()));
+  sl.registerFactory(() => SearchMoviesBloc(searchMovies: sl()));
 }

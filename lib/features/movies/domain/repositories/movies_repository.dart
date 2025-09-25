@@ -1,6 +1,5 @@
 import 'package:ayana_tmdb/features/movies/domain/entities/movie.dart';
 import 'package:ayana_tmdb/features/movies/domain/entities/movie_detail.dart';
-import 'package:ayana_tmdb/features/movies/domain/entities/genre.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ayana_tmdb/core/error/failures.dart';
 

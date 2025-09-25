@@ -15,17 +15,87 @@ class MoviesLocalDataSource {
     await box.put('timestamp', DateTime.now().millisecondsSinceEpoch);
   }
 
+  Future<void> toggleFavorite(MovieDetailModel movieDetail) async {
+    try {
+      print('[HIVE] toggleFavorite called for movieId ${movieDetail.id}');
+      final favoriteIds = await getFavoriteIds();
+      final movieId = movieDetail.id;
+      final box = await Hive.openBox(boxFavorites);
+      print('[HIVE] Current favoriteIds before: $favoriteIds');
+      if (favoriteIds.contains(movieId)) {
+        favoriteIds.remove(movieId);
+        await box.delete(movieId);
+        print('[HIVE] Removed movieId $movieId from favorites');
+      } else {
+        favoriteIds.add(movieId);
+        // Konversi MovieDetailModel ke MovieModel (hanya field yang diperlukan)
+        final movieModel = MovieModel(
+          id: movieDetail.id,
+          title: movieDetail.title,
+          originalTitle: null,
+          originalLanguage: null,
+          overview: movieDetail.overview,
+          releaseDate: movieDetail.releaseDate,
+          posterPath: movieDetail.posterPath,
+          backdropPath: movieDetail.backdropPath,
+          voteAverage: movieDetail.voteAverage,
+          voteCount: null,
+          popularity: null,
+          genreIds: movieDetail.genres.map((g) => g.id).toList(),
+          adult: null,
+          video: null,
+        );
+        await box.put(movieId, movieModel.toJson());
+        print('[HIVE] Added movieId $movieId to favorites: ${movieModel.title}');
+      }
+      await saveFavoriteIds(favoriteIds);
+      print('[HIVE] Updated favoriteIds after: $favoriteIds');
+      print('[HIVE] toggleFavorite completed for movieId $movieId');
+    } catch (e, st) {
+      print('[HIVE][ERROR] toggleFavorite failed for movieId ${movieDetail.id}: $e\n$st');
+      rethrow;
+    }
+  }
+
+  Future<List<MovieModel>> getFavorites() async {
+    final favoriteIds = await getFavoriteIds();
+    final box = await Hive.openBox(boxFavorites);
+    final List<MovieModel> favorites = [];
+    for (final id in favoriteIds) {
+      final data = box.get(id);
+      if (data != null && data is Map) {
+        try {
+          favorites.add(MovieModel.fromJson(Map<String, dynamic>.from(data)));
+        } catch (e, st) {
+          print('[HIVE][ERROR] Failed to parse favorite movie for id $id: $e\n$st');
+        }
+      }
+    }
+    return favorites;
+  }
+
   Future<void> cacheNowPlayingMovies(List<MovieModel> movies) async {
     final box = await Hive.openBox(boxNowPlayingMovies);
     await box.put('data', movies.map((e) => e.toJson()).toList());
     await box.put('timestamp', DateTime.now().millisecondsSinceEpoch);
   }
 
-  Future<List<MovieModel>?> getCachedNowPlayingMovies() async {
+  Future<List<MovieModel>?> getCachedNowPlayingMovies({int ttlMs = 3600000}) async {
     final box = await Hive.openBox(boxNowPlayingMovies);
     final data = box.get('data');
-    if (data is List) {
-      return data.map((e) => MovieModel.fromJson(Map<String, dynamic>.from(e))).toList();
+    final ts = box.get('timestamp');
+    if (data is List && ts is int) {
+      final age = DateTime.now().millisecondsSinceEpoch - ts;
+      if (age <= ttlMs) {
+        try {
+          return data.map((e) => MovieModel.fromJson(Map<String, dynamic>.from(e))).toList();
+        } catch (e, st) {
+          print('[HIVE][ERROR] Failed to parse now playing movie: $e\n$st');
+          return null;
+        }
+      } else {
+        print('[HIVE] Cached now playing movies expired (age=$age ms)');
+      }
     }
     return null;
   }
@@ -47,7 +117,7 @@ class MoviesLocalDataSource {
     final box = await Hive.openBox('$boxMovieDetailPrefix$id');
     final data = box.get('data');
     if (data is Map) {
-      return MovieDetailModel.fromJson(Map<String, dynamic>.from(data));
+      return MovieDetailModel.fromHive(data);
     }
     return null;
   }

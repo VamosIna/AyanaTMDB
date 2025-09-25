@@ -5,73 +5,99 @@ import '../../domain/entities/movie.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
+  final bool isFavorite;
+  final VoidCallback? onFavoriteToggle;
 
-  const MovieCard({Key? key, required this.movie}) : super(key: key);
+  const MovieCard({
+    Key? key,
+    required this.movie,
+    this.isFavorite = false,
+    this.onFavoriteToggle,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.all(8),
+      margin: const EdgeInsets.all(4),
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: InkWell(
         onTap: () {
-          // context.go('/movie/${movie.id}');
+          context.push('/movie/${movie.id}');
         },
-        child: Column(
-          mainAxisSize: MainAxisSize.min, // ⬅️ penting untuk hindari overflow
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // batasi tinggi poster agar gak memaksa keseluruhan kartu
-            SizedBox(
-              height: 160,
-              width: double.infinity,
-              child:
-                  movie.posterPath != null
-                      ? Image.network(
-                        '${ApiConstants.imageBaseUrl}${movie.posterPath}',
-                        fit: BoxFit.cover,
-                        errorBuilder:
-                            (context, error, stackTrace) =>
-                                const Center(child: Icon(Icons.broken_image)),
-                      )
-                      : Container(
-                        color: Colors.grey[300],
-                        child: const Center(child: Icon(Icons.broken_image)),
+            // Poster
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: SizedBox(
+                width: 100,
+                height: 150,
+                child: Stack(
+                  children: [
+                    Positioned.fill(
+                      child: movie.posterPath != null
+                          ? Image.network(
+                              '${ApiConstants.imageBaseUrl}${movie.posterPath}',
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) =>
+                                  const Center(child: Icon(Icons.broken_image)),
+                            )
+                          : Container(
+                              color: Colors.grey[300],
+                              child: const Center(
+                                child: Icon(Icons.broken_image),
+                              ),
+                            ),
+                    ),
+                    if (onFavoriteToggle != null)
+                      Positioned(
+                        top: 8,
+                        right: 8,
+                        child: GestureDetector(
+                          onTap: onFavoriteToggle,
+                          child: Icon(
+                            isFavorite
+                                ? Icons.favorite
+                                : Icons.favorite_border,
+                            color: isFavorite ? Colors.redAccent : Colors.white,
+                            size: 20,
+                          ),
+                        ),
                       ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(12, 8, 12, 4),
-              child: Text(
-                movie.title,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.titleMedium,
+                  ],
+                ),
               ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
-            //   child: Text(
-            //     movie.overview ?? '',
-            //     maxLines: 3,
-            //     overflow: TextOverflow.ellipsis,
-            //     style: Theme.of(context).textTheme.bodyMedium,
-            //   ),
-            // ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12.0,
-                vertical: 8.0,
-              ),
-              child: Row(
-                children: [
-                  const Icon(Icons.star, color: Colors.amber, size: 16),
-                  const SizedBox(width: 6),
-                  Text(
-                    movie.voteAverage?.toStringAsFixed(1) ?? '-',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                ],
+            // Info
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      movie.title,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        const Icon(Icons.star,
+                            color: Colors.amber, size: 16),
+                        const SizedBox(width: 6),
+                        Text(
+                          movie.voteAverage?.toStringAsFixed(1) ?? '-',
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

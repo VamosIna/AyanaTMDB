@@ -88,12 +88,12 @@ class _MoviesRemoteDataSource implements MoviesRemoteDataSource {
   }
 
   @override
-  Future<List<MovieModel>> searchMovies(String query) async {
+  Future<MovieListResponse> searchMovies(String query) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'query': query};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<MovieModel>>(Options(
+    final _options = _setStreamType<MovieListResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -109,12 +109,10 @@ class _MoviesRemoteDataSource implements MoviesRemoteDataSource {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<MovieModel> _value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late MovieListResponse _value;
     try {
-      _value = _result.data!
-          .map((dynamic i) => MovieModel.fromJson(i as Map<String, dynamic>))
-          .toList();
+      _value = MovieListResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

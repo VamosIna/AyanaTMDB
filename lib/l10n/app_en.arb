@@ -1,0 +1,19 @@
+{
+  "@@locale": "en",
+  "appTitle": "Ayana TMDB",
+  "homeLabel": "Home",
+  "searchLabel": "Search",
+  "favoritesLabel": "My List",
+  "profileLabel": "Profile",
+  "offlineMessage": "You are offline",
+  "noMoviesFound": "No movies found.",
+  "emptyWatchlist": "Your watchlist is empty.",
+  "noTrendingFound": "No trending movies found.",
+  "popularOnNetflix": "Popular on Ayana TMDB",
+  "play": "Play",
+  "myList": "My List",
+  "share": "Share",
+  "popularSection": "Popular on Ayana TMDB",
+  "watchlistSection": "Your Watchlist",
+  "trendingSection": "Trending Now"
+}
