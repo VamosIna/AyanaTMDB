@@ -44,15 +44,57 @@ Features include browsing popular and trending movies, searching, adding to favo
 
 ## 📂 Project Structure
 ```
-lib/
- ├── app/                # App entry, router, theme, env
- ├── core/               # Core utilities, DI, network, error handling
- ├── features/movies/    # Movies feature (data, domain, presentation)
- │   ├── data/           # Models, datasources, repositories
- │   ├── domain/         # Entities, repositories, usecases
- │   └── presentation/   # Blocs, pages, widgets
- ├── l10n/               # Localization files
- └── main.dart           # Entry point
+ayana_tmdb/
+ ├── android/                        # Android native project
+ ├── ios/                            # iOS native project
+ ├── assets/                         # Static assets (fonts, images, translations)
+ │   ├── fonts/
+ │   ├── images/
+ │   └── translations/
+ ├── lib/
+ │   ├── app/                        # App entry, router, theme, env
+ │   │   ├── app.dart
+ │   │   ├── config.dart
+ │   │   ├── env.dart
+ │   │   ├── router.dart
+ │   │   └── theme.dart
+ │   ├── bootstrap.dart              # App bootstrap
+ │   ├── core/                       # Core utilities, DI, network, error handling
+ │   │   ├── constants/              # API constants, UI constants
+ │   │   ├── di/                     # Dependency injection setup
+ │   │   ├── error/                  # Failures, exceptions
+ │   │   ├── network/                # Dio client, interceptors
+ │   │   ├── utils/                  # Helpers (date formats, debounce, result)
+ │   │   └── widgets/                # Shared widgets (loading, error, empty state, offline banner)
+ │   ├── features/                   # Feature-based modules
+ │   │   └── movies/                 # Movies feature
+ │   │       ├── data/               # Data layer
+ │   │       │   ├── datasources/    # Local (Hive) & remote (API) datasources
+ │   │       │   ├── models/         # Data models (Movie, Genre, MovieDetail, etc.)
+ │   │       │   └── repositories/   # Repository implementations
+ │   │       ├── domain/             # Domain layer
+ │   │       │   ├── entities/       # Core entities (Movie, MovieDetail, Genre)
+ │   │       │   ├── repositories/   # Repository contracts
+ │   │       │   └── usecases/       # Use cases (GetPopularMovies, SearchMovies, etc.)
+ │   │       └── presentation/       # Presentation layer
+ │   │           ├── blocs/          # BLoC state management
+ │   │           │   ├── detail/
+ │   │           │   ├── favorite/
+ │   │           │   ├── now_playing/
+ │   │           │   ├── popular/
+ │   │           │   └── search/
+ │   │           ├── pages/          # Screens (HomePage, DetailPage, SearchPage, FavoritesPage)
+ │   │           └── widgets/        # UI components (HeroCarousel, MovieCard, Section lists, etc.)
+ │   ├── l10n/                       # Localization files (.arb)
+ │   └── main.dart                   # App entry point
+ ├── scripts/                        # Utility scripts (format, codegen)
+ ├── test/                           # Unit & widget tests
+ │   ├── movies_repository_test.dart
+ │   └── widget_test.dart
+ ├── pubspec.yaml                    # Flutter dependencies
+ ├── analysis_options.yaml            # Linting rules
+ ├── README.md
+ └── app-release.apk                 # Built APK (copied for convenience)
 ```
 
 ---
@@ -97,8 +139,8 @@ The generated APK will be located at:
 build/app/outputs/flutter-apk/app-release.apk
 ```
 
-You can download the latest built APK from the repository’s **Releases** section:  
-👉 [Download AyanaTMDB APK](https://github.com/VamosIna/AyanaTMDB/releases)
+For convenience, the APK is also copied to the project root:  
+👉 [Download AyanaTMDB APK](./app-release.apk)
 
 ---
 
