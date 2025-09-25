@@ -140,7 +140,7 @@ build/app/outputs/flutter-apk/app-release.apk
 ```
 
 For convenience, the APK is also copied to the project root:  
-👉 [Download AyanaTMDB APK](./app-release.apk)
+👉 [Download AyanaTMDB APK](./app-debug.apk)
 
 ---
 
